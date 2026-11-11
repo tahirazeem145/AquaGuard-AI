@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AquaGuard AI: Market Requirements Document – Market Requirements Document (MRD)</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 20mm 16mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.55;
+      color: #1e293b;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header Banner */
+    .doc-banner {
+      background: linear-gradient(135deg, #09131f 0%, #0f2744 50%, #0369a1 100%);
+      color: #ffffff;
+      padding: 22pt 24pt;
+      border-radius: 12px;
+      margin-bottom: 18pt;
+      border: 1px solid #1e3a5f;
+      page-break-after: avoid;
+    }
+
+    .doc-banner-badge {
+      display: inline-block;
+      background: rgba(180, 240, 58, 0.2);
+      border: 1px solid rgba(180, 240, 58, 0.5);
+      color: #b4f03a;
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3pt 8pt;
+      border-radius: 999px;
+      margin-bottom: 8pt;
+    }
+
+    .doc-banner h1 {
+      margin: 0 0 6pt 0;
+      font-size: 20pt;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      border: none;
+      padding: 0;
+    }
+
+    .doc-banner-sub {
+      font-size: 11pt;
+      color: #94a3b8;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* Metadata Panel */
+    .metadata-panel {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8pt 16pt;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10pt 14pt;
+      margin-bottom: 20pt;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+    }
+
+    .metadata-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metadata-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .metadata-value {
+      font-weight: 600;
+      color: #0f172a;
+      margin-top: 1pt;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 16pt;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 4pt;
+      margin-top: 24pt;
+      margin-bottom: 10pt;
+      page-break-after: avoid;
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-size: 12.5pt;
+      font-weight: 750;
+      color: #0369a1;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 3pt;
+      margin-top: 18pt;
+      margin-bottom: 8pt;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 14pt;
+      margin-bottom: 6pt;
+      page-break-after: avoid;
+    }
+
+    h4 {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #334155;
+      margin-top: 10pt;
+      margin-bottom: 4pt;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin: 0 0 8pt 0;
+      line-height: 1.55;
+    }
+
+    ul, ol {
+      margin: 0 0 10pt 0;
+      padding-left: 18pt;
+    }
+
+    li {
+      margin-bottom: 3.5pt;
+      line-height: 1.5;
+    }
+
+    strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 18pt 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12pt 0;
+      font-size: 8pt;
+      page-break-inside: avoid;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+    }
+
+    th {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 6pt 8pt;
+      text-align: left;
+      font-weight: 700;
+      border: 1px solid #0f172a;
+      letter-spacing: 0.02em;
+    }
+
+    td {
+      padding: 5pt 8pt;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      color: #1e293b;
+      line-height: 1.4;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    /* Code Blocks & ASCII Tables */
+    pre, code {
+      font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    }
+
+    pre:not(.mermaid) {
+      background: #0b121e;
+      color: #e2e8f0;
+      padding: 10pt 12pt;
+      border-radius: 8px;
+      font-size: 7.5pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      page-break-inside: avoid;
+      border: 1px solid #1e293b;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+      margin: 10pt 0;
+    }
+
+    code:not(pre code) {
+      background: #f1f5f9;
+      color: #0369a1;
+      padding: 1.5pt 4pt;
+      border-radius: 4px;
+      font-size: 8pt;
+      border: 1px solid #e2e8f0;
+      font-weight: 600;
+    }
+
+    /* Mermaid Diagrams */
+    .mermaid-container {
+      text-align: center;
+      margin: 14pt 0;
+      page-break-inside: avoid;
+      background: #ffffff;
+      padding: 12pt 8pt;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .mermaid {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-size: 8.5pt !important;
+    }
+
+    /* Status Pills & Badges */
+    .pill-must {
+      background: #fee2e2;
+      color: #991b1b;
+      font-weight: 700;
+      padding: 1.5pt 5pt;
+      border-radius: 4px;
+      font-size: 7pt;
+      border: 1px solid #fecaca;
+    }
+
+    .pill-should {
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 700;
+      padding: 1.5pt 5pt;
+      border-radius: 4px;
+      font-size: 7pt;
+      border: 1px solid #fde68a;
+    }
+
+    .pill-could {
+      background: #e0f2fe;
+      color: #075985;
+      font-weight: 700;
+      padding: 1.5pt 5pt;
+      border-radius: 4px;
+      font-size: 7pt;
+      border: 1px solid #bae6fd;
+    }
+
+    /* Print optimization */
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .mermaid-container {
+        break-inside: avoid;
+      }
+      table {
+        break-inside: avoid;
+      }
+      h1, h2, h3, h4 {
+        break-after: avoid;
+      }
+    }
+  </style>
+  <script src="file:///E:/project/AquaGuard AI/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      flowchart: { htmlLabels: true, curve: 'basis' },
+      sequence: { mirrorActors: false, actorMargin: 40 }
+    });
+  </script>
+</head>
+<body>
+
+  <!-- Top Executive Banner -->
+  <div class="doc-banner">
+    <div class="doc-banner-badge">Market Requirements Document (MRD)</div>
+    <h1>AquaGuard AI: Market Requirements Document</h1>
+    <div class="doc-banner-sub">Fish Disease Risk Detection & Early Warning System • Commercial & Economic Architecture</div>
+  </div>
+
+  <!-- Document Metadata Grid -->
+  <div class="metadata-panel">
+    <div class="metadata-item">
+      <span class="metadata-label">Project</span>
+      <span class="metadata-value">AquaGuard AI – Smart Aquaculture Early Warning</span>
+    </div>
+    <div class="metadata-item">
+      <span class="metadata-label">Document Version / Status</span>
+      <span class="metadata-value">v1.0 • Approved / Baseline</span>
+    </div>
+    <div class="metadata-item">
+      <span class="metadata-label">Publication Date</span>
+      <span class="metadata-value">October 2026</span>
+    </div>
+    <div class="metadata-item">
+      <span class="metadata-label">Authors / Team</span>
+      <span class="metadata-value">AquaGuard AI Product & Research Team</span>
+    </div>
+  </div>
+
+  <!-- Main Document Body -->
+  <div class="doc-body">
+    <h1 id="aquaguard-ai-fish-disease-risk-detection-early-warning-system">AquaGuard AI: Fish Disease Risk Detection &amp; Early Warning System</h1>
+<p><strong>Document Version:</strong> 1.0<br />
+<strong>Status:</strong> Approved / Baseline<br />
+<strong>Date:</strong> 2026-10-31<br />
+<strong>Author:</strong> AquaGuard AI Product &amp; Research Team<br />
+<strong>Target Market:</strong> Global Inland Freshwater Aquaculture (Focus: South &amp; Southeast Asia, Sub-Saharan Africa)  </p>
+<hr />
+<h2 id="1-executive-summary-market-opportunity">1. Executive Summary &amp; Market Opportunity</h2>
+<h3 id="11-the-macroeconomic-imperative">1.1 The Macroeconomic Imperative</h3>
+<p>Aquaculture is the fastest-growing agri-food sector in the world, now providing <strong>over 50% of all aquatic food consumed globally</strong> (FAO SOFIA 2024 Report). By 2030, global aquatic food production must expand by an additional 15% to meet the dietary protein requirements of a growing global population under the United Nations Sustainable Development Goals (SDG 2: Zero Hunger; SDG 14: Life Below Water).</p>
+<p>However, biological instability and infectious disease outbreaks represent the single greatest operational and financial threat to this expansion. According to assessments by the <strong>World Bank and the Food and Agriculture Organization (FAO)</strong>:
+* <strong>Global Annual Direct Losses:</strong> Over <strong>$6.0 Billion USD</strong> in direct fish and crustacean biomass mortality per annum.
+* <strong>National Sector Tolls:</strong> In India, aquatic animal diseases inflict an estimated annual loss of <strong>$2.48 Billion USD</strong> (~15% of total sector output value); in Vietnam, annual losses exceed <strong>$1.0 Billion USD</strong>.
+* <strong>Microeconomic Impact:</strong> For a typical smallholder operating a 1-hectare earthen pond, a single uncontrolled disease outbreak (e.g., <em>Aeromonas</em> septicemia, White Spot, or Columnaris) results in an 80–100% crop loss, wiping out an entire season's capital investment and driving rural farming families into severe debt.</p>
+<pre><code>┌────────────────────────────────────────────────────────────────────────┐
+│                     THE AQUACULTURE DISEASE CRISIS                     │
+├───────────────────────────────────┬────────────────────────────────────┤
+│ Global Annual Financial Losses    │ $6.0+ Billion USD per year         │
+├───────────────────────────────────┼────────────────────────────────────┤
+│ Smallholder Farm Representation   │ &gt;85% of total global producers     │
+├───────────────────────────────────┼────────────────────────────────────┤
+│ Diagnostic Laboratory Lead Time   │ 3 to 5 business days (too late)    │
+├───────────────────────────────────┼────────────────────────────────────┤
+│ Reactive Chemical/Antibiotic Cost │ 15% to 20% of total farm OpEx      │
+├───────────────────────────────────┼────────────────────────────────────┤
+│ Current Industrial Sensor Cost    │ $10,000 – $50,000 (Out of reach)   │
+└───────────────────────────────────┴────────────────────────────────────┘
+</code></pre>
+<h3 id="12-market-sizing-tam-sam-som">1.2 Market Sizing (TAM, SAM, SOM)</h3>
+<ul>
+<li><strong>Total Addressable Market (TAM):</strong> <strong>$310 Billion USD</strong> — The entire global aquaculture production market, spanning freshwater finfish, marine finfish, crustaceans, and mollusks across 130+ million metric tonnes of annual output.</li>
+<li><strong>Serviceable Addressable Market (SAM):</strong> <strong>$38.4 Billion USD</strong> — The global freshwater pond aquaculture health management, water monitoring, feed diagnostics, and veterinary bio-security sector, heavily concentrated in developing nations (India, Bangladesh, Vietnam, Indonesia, Philippines, Nigeria, Egypt).</li>
+<li><strong>Serviceable Obtainable Market (SOM):</strong> <strong>$240 Million USD</strong> — The addressable segment of small- to medium-scale commercial and semi-intensive freshwater pond farmers in South and Southeast Asia seeking smartphone-accessible, low-cost diagnostic software and early-warning intelligence over a 3-year horizon.</li>
+</ul>
+<hr />
+<h2 id="2-target-customer-personas-market-segments">2. Target Customer Personas &amp; Market Segments</h2>
+<p>AquaGuard AI serves three distinct customer archetypes with specific operational realities:</p>
+<div class="mermaid-container"><pre class="mermaid">graph TD
+    A[AquaGuard AI Platform] --> B[Persona 1: Smallholder Farmer]
+    A --> C[Persona 2: Commercial Farm Manager]
+    A --> D[Persona 3: Extension Officer & Vet]
+
+    B --> B1[&quot;0.5 - 2 ha Earthen Ponds<br/>Low tech, smartphone-based<br/>Zero capital for sensors&quot;]
+    C --> C1[&quot;5 - 50 ha Multi-Pond Ops<br/>IoT telemetry, staff oversight<br/>Audit compliance & yield focus&quot;]
+    D --> D1[&quot;Govt / NGO / Co-op Agents<br/>Field visits across 100+ ponds<br/>Early disease outbreak tracking&quot;]</pre></div>
+<h3 id="21-persona-1-ramesh-smallholder-fish-farmer-primary-target">2.1 Persona 1: "Ramesh" – Smallholder Fish Farmer (Primary Target)</h3>
+<ul>
+<li><strong>Demographics:</strong> Age 38, operates two 1-acre earthen ponds in Odisha, India; cultivates Indian Major Carps (Rohu, Catla) and Nile Tilapia.</li>
+<li><strong>Technology Profile:</strong> Owns a low-cost Android smartphone (4G connectivity, intermittent in rural fields); uses WhatsApp and YouTube; limited English fluency (prefers local language or visual icons).</li>
+<li><strong>Workday Reality:</strong> Inspects ponds at dawn and dusk; monitors feeding behavior from pond dykes; occasionally catches fish using a hand scoop net to check growth.</li>
+<li><strong>Core Frustrations:</strong></li>
+<li>Cannot see beneath the murky pond water; only notices disease when dead fish float to the surface.</li>
+<li>Cannot afford $1,000 electronic dissolved oxygen meters; relies on subjective water smell or seeing fish gasp at the surface.</li>
+<li>Local chemical dealer sells expensive antibiotics that often don't work or poison the pond.</li>
+<li><strong>Jobs to be Done (JTBD):</strong> <em>"When I net a sluggish fish with spots or frayed fins, I want to take a quick photo with my phone and know immediately what disease it is, what water parameter went wrong, and exactly what affordable treatment (salt, lime, water exchange) to apply today so I don't lose my harvest."</em></li>
+</ul>
+<h3 id="22-persona-2-vikram-commercial-pond-farm-manager">2.2 Persona 2: "Vikram" – Commercial Pond Farm Manager</h3>
+<ul>
+<li><strong>Demographics:</strong> Age 45, manages a 25-hectare commercial semi-intensive farm with 12 distinct nursery and grow-out ponds in Andhra Pradesh, India.</li>
+<li><strong>Technology Profile:</strong> Proficient with web dashboards, laptop and smartphone; utilizes digital accounting software; open to IoT sensors.</li>
+<li><strong>Core Frustrations:</strong></li>
+<li>Farm laborers fail to record water parameters accurately or miss early signs of fin erosion across distant ponds.</li>
+<li>Disease outbreaks in one nursery pond quickly spread farm-wide via shared equipment or inlet canals.</li>
+<li>Export processing facilities enforce strict zero-tolerance testing for antibiotic residues (chloramphenicol, nitrofurans); a single contaminated consignment causes complete shipment rejection.</li>
+<li><strong>Jobs to be Done (JTBD):</strong> <em>"I want a single centralized dashboard to monitor all 12 ponds, track daily water quality trends, receive automated alerts when disease risk rises, and enforce non-antibiotic biosecurity protocols across my workforce."</em></li>
+</ul>
+<h3 id="23-persona-3-dr-ananya-fisheries-extension-officer-cooperative-vet">2.3 Persona 3: "Dr. Ananya" – Fisheries Extension Officer / Cooperative Vet</h3>
+<ul>
+<li><strong>Demographics:</strong> Age 32, government field officer overseeing 150+ smallholder aquaculture ponds across a rural district.</li>
+<li><strong>Technology Profile:</strong> Uses laptop and tablet; frequently travels between remote villages with spotty cellular coverage.</li>
+<li><strong>Core Frustrations:</strong></li>
+<li>Overburdened; cannot physically visit every pond before disease spreads across the river basin.</li>
+<li>Farmers call her after fish have already been dead for 48 hours, making post-mortem diagnosis difficult.</li>
+<li>Lacks rapid field diagnostic kits; sending tissue samples to the state university takes 5 days.</li>
+<li><strong>Jobs to be Done (JTBD):</strong> <em>"I want a standardized mobile diagnostic screening tool that farmers can use in the field to submit structured visual and water reports, enabling me to triage regional outbreaks and recommend interventions remotely."</em></li>
+</ul>
+<hr />
+<h2 id="3-customer-pain-points-unmet-market-needs">3. Customer Pain Points &amp; Unmet Market Needs</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Pain Point ID</th>
+<th style="text-align: left;">Real-World Problem</th>
+<th style="text-align: left;">Current Market Workaround</th>
+<th style="text-align: left;">Business &amp; Operational Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>PP-01: Optical Invisibility</strong></td>
+<td style="text-align: left;">Freshwater pond water is turbid (algae/silt); sub-surface symptoms are invisible until fish surface near death.</td>
+<td style="text-align: left;">Naked-eye observation from pond embankments during feeding.</td>
+<td style="text-align: left;">Catastrophic latency; 40–80% mortality before disease is recognized.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PP-02: Sensor Cost Barrier</strong></td>
+<td style="text-align: left;">High-precision commercial optical DO and multiparameter sondes cost $1,500–$5,000+ each.</td>
+<td style="text-align: left;">Farmers use no sensors or buy unreliable $15 chemical titration drop kits that expire quickly.</td>
+<td style="text-align: left;">Water crashes (nocturnal hypoxia, ammonia spikes) go completely undetected until mass suffocation occurs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PP-03: Laboratory Vacuum</strong></td>
+<td style="text-align: left;">Diagnostic veterinary labs are located in urban university centers 50–200 km away from rural farms.</td>
+<td style="text-align: left;">Farmers consult local feed/chemical salesmen who push high-margin proprietary chemicals.</td>
+<td style="text-align: left;">Wrong treatments applied; 15–20% of operating expenditure wasted on ineffective chemicals.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PP-04: Antibiotic Dependency &amp; AMR</strong></td>
+<td style="text-align: left;">Blind deployment of human and veterinary antibiotics (oxytetracycline, ciprofloxacin) as a panic response.</td>
+<td style="text-align: left;">Farmers dump antibiotics directly into pond water without veterinary prescriptions.</td>
+<td style="text-align: left;">Proliferation of drug-resistant pathogens; biofilter bacteria collapse; international export bans.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PP-05: Siloed Diagnostics</strong></td>
+<td style="text-align: left;">Existing tools only measure water OR classify images, never correlating the two.</td>
+<td style="text-align: left;">Manual guesswork trying to connect a water test result with a skin lesion.</td>
+<td style="text-align: left;">Misses the biological reality: poor water quality is the direct trigger that causes pathogens to attack.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-competitive-landscape-positioning">4. Competitive Landscape &amp; Positioning</h2>
+<h3 id="41-competitor-analysis-matrix">4.1 Competitor Analysis Matrix</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Solution</th>
+<th style="text-align: left;">Target Market</th>
+<th style="text-align: left;">Key Technologies</th>
+<th style="text-align: left;">Pros</th>
+<th style="text-align: left;">Cons &amp; Market Gaps</th>
+<th style="text-align: left;">Pricing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Aquabyte</strong> (Norway/US)</td>
+<td style="text-align: left;">Industrial Atlantic Salmon (Marine Net Pens)</td>
+<td style="text-align: left;">Submersible stereo HD cameras, deep CNNs, edge computing</td>
+<td style="text-align: left;">Highly automated sea lice counting, biomass calculation</td>
+<td style="text-align: left;">Marine cages only; completely ineffective in turbid freshwater ponds; extreme cost.</td>
+<td style="text-align: left;"><strong>Enterprise Subscription:</strong> $2,000 – $5,000 / cage / month</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>XpertSea</strong> (Canada)</td>
+<td style="text-align: left;">Commercial Shrimp Hatcheries &amp; Ponds</td>
+<td style="text-align: left;">Optical imaging hardware, mobile computer vision</td>
+<td style="text-align: left;">Accurate shrimp counting, size distribution, harvest timing</td>
+<td style="text-align: left;">Requires specialized physical hardware bucket; focused on shrimp, not finfish disease triage.</td>
+<td style="text-align: left;"><strong>Hardware + SaaS:</strong> $3,000 – $7,000 setup</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>eFishery</strong> (Indonesia)</td>
+<td style="text-align: left;">Freshwater Carp &amp; Tilapia Farmers</td>
+<td style="text-align: left;">Smart automated feeder, acoustic appetite sensors, IoT telemetry</td>
+<td style="text-align: left;">Excellent feeding efficiency, established distribution network</td>
+<td style="text-align: left;">Primarily an automated feeder; basic water logging; lacks computer vision disease diagnostics.</td>
+<td style="text-align: left;"><strong>Feeder Lease / Purchase:</strong> $200 – $500 per unit</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Manual Drop Test Kits</strong> (API, Hanna, Merck)</td>
+<td style="text-align: left;">All Aquaculture</td>
+<td style="text-align: left;">Chemical reagent titration / colorimetric test strips</td>
+<td style="text-align: left;">Low upfront cost ($20–$50); no electricity required</td>
+<td style="text-align: left;">Highly subjective color matching; tedious manual testing; zero automated alerts or advice.</td>
+<td style="text-align: left;"><strong>Consumable Cost:</strong> $20 – $50 per kit (lasts 30 tests)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AquaGuard AI</strong> <em>(Our Solution)</em></td>
+<td style="text-align: left;"><strong>Smallholder &amp; Commercial Freshwater Pond Farms</strong></td>
+<td style="text-align: left;"><strong>MobileNetV3 CV + Random Forest Telemetry + Multimodal Risk Fusion Engine</strong></td>
+<td style="text-align: left;"><strong>Zero hardware requirement; smartphone camera ready; multimodal risk scoring; step-by-step non-antibiotic action plans.</strong></td>
+<td style="text-align: left;"><strong>Requires initial network connection for cloud inference; relies on user-submitted photos.</strong></td>
+<td style="text-align: left;"><strong>Freemium MVP ($0 for smallholders; Tiered SaaS for commercial farms)</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-aquaguard-ai-competitive-differentiation-the-moat">4.2 AquaGuard AI Competitive Differentiation ("The Moat")</h3>
+<ol>
+<li><strong>Multimodal Environmental &amp; Pathological Risk Fusion:</strong> We are the only platform that explicitly links physical water chemistry ($DO$, $pH$, $Temp$, $NH_3$) with visual dermatological symptoms through an interpretable biological synergy engine.</li>
+<li><strong>Zero Capital Expenditure (No Expensive Hardware Required):</strong> Smallholders can use their existing smartphones. Water telemetry can be entered via interactive UI sliders (using simple farm drop kits) OR streamed from low-cost IoT nodes.</li>
+<li><strong>Prescriptive, Non-Chemical Agronomic Action Plans:</strong> Rather than returning a useless raw label like <em>"82% Columnaris"</em>, AquaGuard AI outputs immediate, step-by-step remedial protocols (e.g. <em>"Run paddlewheel aerator for 4 hours; apply 3 ppt non-iodized salt bath; withhold feeding today"</em>).</li>
+<li><strong>Offline-First &amp; Mobile-Optimized:</strong> Built with progressive caching and client-side image compression, functioning reliably even on weak rural 2G/3G networks.</li>
+</ol>
+<hr />
+<h2 id="5-value-proposition-business-model">5. Value Proposition &amp; Business Model</h2>
+<h3 id="51-value-proposition-by-stakeholder">5.1 Value Proposition by Stakeholder</h3>
+<ul>
+<li><strong>For Smallholder Farmers:</strong> <em>"Protect your entire season's fish harvest from mass mortality using just your smartphone, without buying expensive sensors or wasting money on useless antibiotics."</em></li>
+<li><strong>For Commercial Farm Managers:</strong> <em>"Gain real-time visibility across all your ponds, cut operational losses by up to 35%, ensure zero antibiotic residue rejections, and streamline staff workflows from a single dashboard."</em></li>
+<li><strong>For Governments &amp; Cooperatives:</strong> <em>"Real-time regional biosurveillance map tracking disease vectors, preventing regional epidemics, and promoting sustainable, export-grade aquaculture biosecurity."</em></li>
+</ul>
+<h3 id="52-monetization-business-model-go-to-market-strategy">5.2 Monetization &amp; Business Model (Go-to-Market Strategy)</h3>
+<pre><code>┌────────────────────────────────────────────────────────────────────────┐
+│                      AQUAGUARD AI BUSINESS MODEL                       │
+├──────────────────┬──────────────────┬──────────────────────────────────┤
+│ TIER             │ TARGET AUDIENCE  │ PRICING &amp; FEATURES               │
+├──────────────────┼──────────────────┼──────────────────────────────────┤
+│ 1. Community     │ Smallholders     │ • FREE ($0 / month forever)      │
+│    (Freemium)    │ (1-2 Ponds)      │ • Up to 20 AI image scans/month  │
+│                  │                  │ • Manual water quality sliders   │
+│                  │                  │ • Standard biosecurity action plan│
+├──────────────────┼──────────────────┼──────────────────────────────────┤
+│ 2. Pro Farm      │ Semi-Intensive &amp; │ • $15 – $35 / farm / month       │
+│    (Commercial)  │ Commercial Farms │ • Unlimited AI scans across ponds│
+│                  │ (3-20 Ponds)     │ • Automated IoT telemetry sync   │
+│                  │                  │ • Historical trend analytics     │
+│                  │                  │ • SMS / WhatsApp alert dispatch  │
+├──────────────────┼──────────────────┼──────────────────────────────────┤
+│ 3. Enterprise    │ Hatcheries, Feed │ • Custom Annual Contract         │
+│    / Government  │ Companies, State │ • Regional disease epidemiology  │
+│    (B2B &amp; B2G)   │ Fisheries Depts  │ • White-label extension app      │
+│                  │                  │ • API access for farm sensor ERP │
+└──────────────────┴──────────────────┴──────────────────────────────────┘
+</code></pre>
+<h3 id="53-distribution-gtm-partnerships">5.3 Distribution &amp; GTM Partnerships</h3>
+<ul>
+<li><strong>Phase 1 (Hackathon &amp; Community Pilots):</strong> Partner with local aquaculture cooperatives and university fisheries extension programs in Odisha and Andhra Pradesh (India) to onboard 50 smallholders for pilot testing.</li>
+<li><strong>Phase 2 (Feed &amp; Fingerling Distributor Distribution):</strong> Distribute AquaGuard AI access through rural fish feed distributors (e.g. CP Group, Godrej Agrovet, Cargill) who bundle the app as a value-add service to increase farmer harvest survival.</li>
+<li><strong>Phase 3 (Government Extension Integration):</strong> Integrate with state fisheries department schemes (e.g., PMMSY - Pradhan Mantri Matsya Sampada Yojana in India) as a certified digital extension tool.</li>
+</ul>
+<hr />
+<h2 id="6-market-success-metrics-key-performance-indicators-kpis">6. Market Success Metrics &amp; Key Performance Indicators (KPIs)</h2>
+<p>To evaluate market viability and real-world impact, AquaGuard AI defines the following operational KPIs:</p>
+<pre><code>                  ┌─────────────────────────────────────┐
+                  │      AQUAGUARD AI MARKET KPIS       │
+                  └──────────────────┬──────────────────┘
+                                     │
+        ┌────────────────────────────┼────────────────────────────┐
+        ▼                            ▼                            ▼
+ [Farmer Economics]         [Diagnostic Impact]         [Ecosystem / AMR]
+ • &gt;25% reduction in        • &gt;92% visual diagnostic    • &gt;40% reduction in
+   disease mortality          accuracy in field           injudicious antibiotic
+ • &gt;15% savings in          • &lt;5 sec end-to-end           applications
+   chemical / drug spend      scan-to-advisory speed    • 100% adherence to FAO
+ • 1.4x - 1.8x ROI per      • &gt;70% Monthly Active         prescriptive water
+   production cycle           Users (MAU) in pilots       safety guidelines
+</code></pre>
+<hr />
+<h2 id="7-regulatory-environmental-and-biosecurity-compliance">7. Regulatory, Environmental, and Biosecurity Compliance</h2>
+<ol>
+<li><strong>Antimicrobial Resistance (AMR) &amp; One Health Alignment:</strong> AquaGuard AI aligns directly with the WHO/FAO/WOAH "One Health" Global Action Plan by prioritizing non-chemical, water remediation, and biosecurity interventions over antibiotic treatments.</li>
+<li><strong>Diagnostic Disclaimer &amp; Veterinary Compliance:</strong> AquaGuard AI is marketed strictly as a <strong>"Risk Screening and Early Warning Decision Support Tool"</strong>, not an official certification of animal health. Suspected high-mortality viral pathogens (TiLV, KHV) automatically trigger guidance directing farmers to certified government veterinary diagnostic laboratories.</li>
+<li><strong>Data Privacy &amp; Agronomic Security:</strong> Farmer pond data, geolocation, and yield metrics are encrypted via Supabase PostgreSQL Row-Level Security (RLS) to ensure farmer confidentiality and proprietary harvest data protection.</li>
+</ol>
+  </div>
+
+</body>
+</html>

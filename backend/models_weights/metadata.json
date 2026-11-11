@@ -1,0 +1,38 @@
+{
+  "model_name": "mobilenet_v3_large",
+  "model_label": "MobileNetV3-Large",
+  "class_names": [
+    "Bacterial Red disease",
+    "Bacterial diseases - Aeromoniasis",
+    "Bacterial gill disease",
+    "Fungal diseases Saprolegniasis",
+    "Healthy Fish",
+    "Parasitic diseases",
+    "Viral diseases White tail disease"
+  ],
+  "checkpoint_path": "/workspace/artifacts/tuned_experiments/mobilenet_v3_large/best_model.pt",
+  "device_used": "cuda",
+  "accelerator_name": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+  "dataset_root": "/workspace/datasets/merged_balanced",
+  "epochs_completed": 4,
+  "training_seconds": 88.24,
+  "best_epoch": 4,
+  "best_validation_metrics": {
+    "accuracy": 0.9827586206896551,
+    "macro_precision": 0.983558451189152,
+    "macro_recall": 0.9827586206896551,
+    "macro_f1": 0.9828125643463631,
+    "macro_auc_ovr": 0.999773512258649,
+    "weighted_auc_ovr": 0.9997735122586491,
+    "loss": 0.33043593667410864
+  },
+  "test_metrics": {
+    "accuracy": 0.9827586206896551,
+    "macro_precision": 0.9833495713038748,
+    "macro_recall": 0.9827586206896551,
+    "macro_f1": 0.9828151761790206,
+    "macro_auc_ovr": 0.9995682577430497,
+    "weighted_auc_ovr": 0.9995682577430497,
+    "loss": 0.335032007083517
+  }
+}

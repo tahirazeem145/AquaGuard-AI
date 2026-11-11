@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AquaGuard AI: Product Requirements Document – Product Requirements Document (PRD)</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 20mm 16mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.55;
+      color: #1e293b;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header Banner */
+    .doc-banner {
+      background: linear-gradient(135deg, #09131f 0%, #0f2744 50%, #0369a1 100%);
+      color: #ffffff;
+      padding: 22pt 24pt;
+      border-radius: 12px;
+      margin-bottom: 18pt;
+      border: 1px solid #1e3a5f;
+      page-break-after: avoid;
+    }
+
+    .doc-banner-badge {
+      display: inline-block;
+      background: rgba(180, 240, 58, 0.2);
+      border: 1px solid rgba(180, 240, 58, 0.5);
+      color: #b4f03a;
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3pt 8pt;
+      border-radius: 999px;
+      margin-bottom: 8pt;
+    }
+
+    .doc-banner h1 {
+      margin: 0 0 6pt 0;
+      font-size: 20pt;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      border: none;
+      padding: 0;
+    }
+
+    .doc-banner-sub {
+      font-size: 11pt;
+      color: #94a3b8;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* Metadata Panel */
+    .metadata-panel {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8pt 16pt;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10pt 14pt;
+      margin-bottom: 20pt;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+    }
+
+    .metadata-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metadata-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .metadata-value {
+      font-weight: 600;
+      color: #0f172a;
+      margin-top: 1pt;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 16pt;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 4pt;
+      margin-top: 24pt;
+      margin-bottom: 10pt;
+      page-break-after: avoid;
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-size: 12.5pt;
+      font-weight: 750;
+      color: #0369a1;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 3pt;
+      margin-top: 18pt;
+      margin-bottom: 8pt;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 14pt;
+      margin-bottom: 6pt;
+      page-break-after: avoid;
+    }
+
+    h4 {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #334155;
+      margin-top: 10pt;
+      margin-bottom: 4pt;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin: 0 0 8pt 0;
+      line-height: 1.55;
+    }
+
+    ul, ol {
+      margin: 0 0 10pt 0;
+      padding-left: 18pt;
+    }
+
+    li {
+      margin-bottom: 3.5pt;
+      line-height: 1.5;
+    }
+
+    strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 18pt 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12pt 0;
+      font-size: 8pt;
+      page-break-inside: avoid;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+    }
+
+    th {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 6pt 8pt;
+      text-align: left;
+      font-weight: 700;
+      border: 1px solid #0f172a;
+      letter-spacing: 0.02em;
+    }
+
+    td {
+      padding: 5pt 8pt;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      color: #1e293b;
+      line-height: 1.4;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    /* Code Blocks & ASCII Tables */
+    pre, code {
+      font-family: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+    }
+
+    pre:not(.mermaid) {
+      background: #0b121e;
+      color: #e2e8f0;
+      padding: 10pt 12pt;
+      border-radius: 8px;
+      font-size: 7.5pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      page-break-inside: avoid;
+      border: 1px solid #1e293b;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+      margin: 10pt 0;
+    }
+
+    code:not(pre code) {
+      background: #f1f5f9;
+      color: #0369a1;
+      padding: 1.5pt 4pt;
+      border-radius: 4px;
+      font-size: 8pt;
+      border: 1px solid #e2e8f0;
+      font-weight: 600;
+    }
+
+    /* Mermaid Diagrams */
+    .mermaid-container {
+      text-align: center;
+      margin: 14pt 0;
+      page-break-inside: avoid;
+      background: #ffffff;
+      padding: 12pt 8pt;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .mermaid {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-size: 8.5pt !important;
+    }
+
+    /* Status Pills & Badges */
+    .pill-must {
+      background: #fee2e2;
+      color: #991b1b;
+      font-weight: 700;
+      padding: 1.5pt 5pt;
+      border-radius: 4px;
+      font-size: 7pt;
+      border: 1px solid #fecaca;
+    }
+
+    .pill-should {
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 700;
+      padding: 1.5pt 5pt;
+      border-radius: 4px;
+      font-size: 7pt;
+      border: 1px solid #fde68a;
+    }
+
+    .pill-could {
+      background: #e0f2fe;
+      color: #075985;
+      font-weight: 700;
+      padding: 1.5pt 5pt;
+      border-radius: 4px;
+      font-size: 7pt;
+      border: 1px solid #bae6fd;
+    }
+
+    /* Print optimization */
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .mermaid-container {
+        break-inside: avoid;
+      }
+      table {
+        break-inside: avoid;
+      }
+      h1, h2, h3, h4 {
+        break-after: avoid;
+      }
+    }
+  </style>
+  <script src="file:///E:/project/AquaGuard AI/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      flowchart: { htmlLabels: true, curve: 'basis' },
+      sequence: { mirrorActors: false, actorMargin: 40 }
+    });
+  </script>
+</head>
+<body>
+
+  <!-- Top Executive Banner -->
+  <div class="doc-banner">
+    <div class="doc-banner-badge">Product Requirements Document (PRD)</div>
+    <h1>AquaGuard AI: Product Requirements Document</h1>
+    <div class="doc-banner-sub">Engineering Specifications, Multimodal Risk Fusion Engine & API Contracts</div>
+  </div>
+
+  <!-- Document Metadata Grid -->
+  <div class="metadata-panel">
+    <div class="metadata-item">
+      <span class="metadata-label">Project</span>
+      <span class="metadata-value">AquaGuard AI – Smart Aquaculture Early Warning</span>
+    </div>
+    <div class="metadata-item">
+      <span class="metadata-label">Document Version / Status</span>
+      <span class="metadata-value">v1.0 • Approved / Engineering Baseline</span>
+    </div>
+    <div class="metadata-item">
+      <span class="metadata-label">Publication Date</span>
+      <span class="metadata-value">October 2026</span>
+    </div>
+    <div class="metadata-item">
+      <span class="metadata-label">Authors / Team</span>
+      <span class="metadata-value">Senior Software Architect, AI/ML Engineer, and Product Team</span>
+    </div>
+  </div>
+
+  <!-- Main Document Body -->
+  <div class="doc-body">
+    <h1 id="aquaguard-ai-fish-disease-risk-detection-early-warning-system">AquaGuard AI: Fish Disease Risk Detection &amp; Early Warning System</h1>
+<p><strong>Document Version:</strong> 1.0<br />
+<strong>Status:</strong> Approved / Engineering Baseline<br />
+<strong>Date:</strong> 2026-10-31<br />
+<strong>Target Release:</strong> Hackathon Prototype (MVP V1.0)<br />
+<strong>Authors:</strong> Senior Software Architect, AI/ML Engineer, and Product Team  </p>
+<hr />
+<h2 id="1-product-overview-strategic-goals">1. Product Overview &amp; Strategic Goals</h2>
+<h3 id="11-product-vision">1.1 Product Vision</h3>
+<p><strong>AquaGuard AI</strong> is an intelligent, accessible, multimodal disease risk detection and early warning platform engineered specifically for freshwater aquaculture pond ecosystems. It empowers smallholder fish farmers and commercial pond managers to detect infectious fish diseases early, monitor water quality degradation, understand environmental pathogen triggers, and execute immediate, non-antibiotic mitigation protocols—all through an intuitive, mobile-optimized web application.</p>
+<h3 id="12-core-product-objectives">1.2 Core Product Objectives</h3>
+<ol>
+<li><strong>Accurate Visual Pathogen Screening:</strong> Classify 6 major freshwater fish diseases plus healthy status with &gt;92% validation accuracy using a fine-tuned MobileNetV3 deep learning model.</li>
+<li><strong>Real-time Environmental Hazard Tracking:</strong> Evaluate key water parameters (Dissolved Oxygen, pH, Temperature, Ammonia) against biological safety limits using a hybrid Random Forest and FAO guardrail engine.</li>
+<li><strong>Multimodal Risk Fusion:</strong> Synthesize visual diagnostic probabilities with environmental hazard metrics into a unified, calibrated <strong>Composite Pond Health Risk Score (0–100)</strong>.</li>
+<li><strong>Actionable Farm-Level Prescriptions:</strong> Translate diagnostic classifications into clear, step-by-step agronomic action plans (aeration schedules, salt baths, water exchange rates, quarantine steps).</li>
+<li><strong>Frictionless Demo Experience:</strong> Deliver a responsive, stable web dashboard featuring pre-loaded, one-click demonstration scenarios designed for rapid hackathon judge evaluation.</li>
+</ol>
+<h3 id="13-out-of-scope-non-goals-for-mvp-v10">1.3 Out-of-Scope (Non-Goals for MVP V1.0)</h3>
+<ul>
+<li>❌ Solder and deploy physical edge IoT hardware (ESP32 / LoRaWAN buoys).</li>
+<li>❌ Continuous underwater video stream object tracking or underwater camera hardware.</li>
+<li>❌ Native iOS / Android app store packaging (responsive web app meets all mobile requirements).</li>
+<li>❌ Automated mechanical motor controls for pond aerators or feeding units.</li>
+<li>❌ Native multi-dialect voice synthesis / speech recognition.</li>
+</ul>
+<hr />
+<h2 id="2-user-personas-user-journeys">2. User Personas &amp; User Journeys</h2>
+<h3 id="21-primary-user-persona">2.1 Primary User Persona</h3>
+<ul>
+<li><strong>Name:</strong> Ramesh, Smallholder Fish Farmer (1.5 ha pond).</li>
+<li><strong>Goal:</strong> Quickly diagnose moribund or spotted fish caught during morning feeding, check pond safety, and apply the correct low-cost remedy immediately.</li>
+<li><strong>Tech Context:</strong> Low-to-mid range Android phone, mobile browser, intermittent 4G/3G connectivity.</li>
+</ul>
+<h3 id="22-end-to-end-user-journey-walkthrough">2.2 End-to-End User Journey Walkthrough</h3>
+<div class="mermaid-container"><pre class="mermaid">sequenceDiagram
+    autonumber
+    actor Farmer as Fish Farmer
+    participant UI as React Web Dashboard
+    participant API as FastAPI Backend
+    participant ML as ML Inference Engines
+    participant DB as Supabase Cloud
+
+    Farmer->>UI: 1. Opens dashboard on mobile browser
+    UI->>Farmer: 2. Displays Pond Health Summary & Risk Gauge
+    Farmer->>UI: 3. Clicks &quot;New Pond Health Scan&quot;
+    Farmer->>UI: 4. Takes or uploads photo of fish (net check)
+    Farmer->>UI: 5. Adjusts or confirms water parameters (DO, pH, Temp, Ammonia)
+    Farmer->>UI: 6. Submits &quot;Run Diagnostic Assessment&quot;
+
+    UI->>API: 7. POST /api/v1/assess-pond (Image + Telemetry)
+    API->>ML: 8. Execute MobileNetV3 + Random Forest + Fusion Engine
+    ML-->>API: 9. Returns Disease Label, Risk Score (78), & Action Plan
+    API->>DB: 10. Persist scan log, image URL, & alert
+    API-->>UI: 11. Returns unified JSON assessment
+
+    UI->>Farmer: 12. Displays Warning Alert, Risk Gauge, & Step-by-Step Action Plan
+    Farmer->>Farmer: 13. Executes non-antibiotic remediation (aeration + salt bath)</pre></div>
+<hr />
+<h2 id="3-functional-requirements-moscow-prioritization">3. Functional Requirements (MoSCoW Prioritization)</h2>
+<pre><code>┌────────────────────────────────────────────────────────────────────────┐
+│               AQUAGUARD AI FUNCTIONAL REQUIREMENTS MATRIX              │
+├─────────┬────────────────────────────────────────────┬─────────────────┤
+│ ID      │ Feature / Capability                       │ MoSCoW Priority │
+├─────────┼────────────────────────────────────────────┼─────────────────┤
+│ FR-01   │ Fish Image Intake &amp; Client Preprocessing   │ <span class="pill-must">MUST HAVE (P0)</span>  │
+│ FR-02   │ Computer Vision Disease Classification     │ <span class="pill-must">MUST HAVE (P0)</span>  │
+│ FR-03   │ Water Quality Telemetry Input &amp; Evaluation │ <span class="pill-must">MUST HAVE (P0)</span>  │
+│ FR-04   │ Multimodal Risk Fusion Engine              │ <span class="pill-must">MUST HAVE (P0)</span>  │
+│ FR-05   │ Early Warning &amp; Prescriptive Action Engine │ <span class="pill-must">MUST HAVE (P0)</span>  │
+│ FR-06   │ Interactive Dashboard &amp; Live Risk Gauge    │ <span class="pill-must">MUST HAVE (P0)</span>  │
+│ FR-07   │ 3 Pre-Loaded Judge Demonstration Presets   │ <span class="pill-must">MUST HAVE (P0)</span>  │
+│ FR-08   │ Supabase Storage &amp; Historical Scan Log     │ <span class="pill-should">SHOULD HAVE (P1)</span>│
+│ FR-09   │ PDF / Print Diagnostic Report Export       │ <span class="pill-could">COULD HAVE (P2)</span> │
+│ FR-10   │ Simulated Automated IoT Stream Mode        │ <span class="pill-could">COULD HAVE (P2)</span> │
+│ FR-11   │ Continuous Underwater Camera Object Stream │ <span class="pill-could">WON'T HAVE (P3)</span> │
+└─────────┴────────────────────────────────────────────┴─────────────────┘
+</code></pre>
+<h3 id="31-fr-01-fish-image-intake-client-preprocessing-p0">3.1 FR-01: Fish Image Intake &amp; Client Preprocessing (P0)</h3>
+<ul>
+<li><strong>Description:</strong> The system must allow users to upload an image from file storage or capture directly via a mobile device camera.</li>
+<li><strong>Requirements:</strong></li>
+<li>Support formats: <code>image/jpeg</code>, <code>image/png</code>, <code>image/webp</code>.</li>
+<li>Maximum upload file size: 10 MB.</li>
+<li>Client-side preview displayed immediately after selection.</li>
+<li>Automatic client-side canvas pre-compression to reduce rural upload payload to &lt;300 KB.</li>
+<li>In-app guideline overlay showing proper fish framing (lateral body view, dorsal view for dropsy).</li>
+</ul>
+<h3 id="32-fr-02-computer-vision-disease-diagnostic-engine-p0">3.2 FR-02: Computer Vision Disease Diagnostic Engine (P0)</h3>
+<ul>
+<li><strong>Description:</strong> The backend must execute deep learning inference on uploaded fish images.</li>
+<li><strong>Requirements:</strong></li>
+<li>Backbone model: <code>MobileNetV3-Large</code> pre-trained on ImageNet and fine-tuned on the South Asian Freshwater Fish Disease dataset.</li>
+<li>7 Supported Target Classes:<ol>
+<li><code>Healthy Fish</code></li>
+<li><code>Ichthyophthiriasis (White Spot Disease)</code></li>
+<li><code>Fin and Tail Rot</code></li>
+<li><code>Columnaris Disease (Saddleback / Cotton-mouth)</code></li>
+<li><code>Saprolegniasis (Water Mold)</code></li>
+<li><code>Dropsy / Ascites</code></li>
+<li><code>Epizootic Ulcerative Syndrome (EUS)</code></li>
+</ol>
+</li>
+<li>Output requirements: Top-1 predicted pathology, confidence percentage ($0.00 - 1.00$), and Top-3 differential diagnosis probability distribution.</li>
+<li>CPU inference latency benchmark: $\le 45 \text{ ms}$.</li>
+</ul>
+<h3 id="33-fr-03-water-quality-telemetry-input-evaluation-p0">3.3 FR-03: Water Quality Telemetry Input &amp; Evaluation (P0)</h3>
+<ul>
+<li><strong>Description:</strong> The system must accept and evaluate critical physicochemical water parameters.</li>
+<li><strong>Supported Parameters &amp; Ranges:</strong></li>
+<li><strong>Dissolved Oxygen ($DO$):</strong> $0.0 - 15.0 \text{ mg/L}$ (Critical threshold: $&lt; 3.5 \text{ mg/L}$, Lethal: $&lt; 2.0 \text{ mg/L}$).</li>
+<li><strong>Potential of Hydrogen ($pH$):</strong> $0.0 - 14.0$ (Normal safe range: $6.8 - 8.2$; Critical: $&lt; 6.0$ or $&gt; 9.0$).</li>
+<li><strong>Water Temperature ($T$):</strong> $10.0 - 40.0^\circ\text{C}$ (Normal: $24 - 30^\circ\text{C}$; Acute drop alert: $&gt; 3^\circ\text{C}$ drop).</li>
+<li><strong>Total Ammonia Nitrogen ($TAN$):</strong> $0.0 - 5.0 \text{ mg/L}$ (Dynamic calculation of un-ionized ammonia $NH_3$; Toxic: $&gt; 0.05 \text{ mg/L}$).</li>
+<li><strong>Turbidity / Secchi Depth:</strong> $0 - 200 \text{ NTU}$ / $5 - 60 \text{ cm}$.</li>
+<li><strong>Evaluation Engine:</strong></li>
+<li>Tier 1: Deterministic Biological Guardrail (immediate override if DO or Ammonia violates lethal limits).</li>
+<li>Tier 2: Scikit-learn Random Forest regressor outputting an <strong>Environmental Hazard Score ($H_{env} \in [0, 100]$)</strong>.</li>
+</ul>
+<h3 id="34-fr-04-multimodal-risk-fusion-engine-p0">3.4 FR-04: Multimodal Risk Fusion Engine (P0)</h3>
+<ul>
+<li><strong>Description:</strong> Fuses the visual pathology output with environmental hazard telemetry into a calibrated composite metric.</li>
+<li><strong>Mathematical Formula:</strong>
+  $$R_{pond} = \min\left(100, \; 0.55 \cdot (P_{max} \times 100) + 0.45 \cdot H_{env} + S(C_{disease}, \mathbf{X}_{env})\right)$$</li>
+<li><strong>Synergy Multipliers ($S$):</strong></li>
+<li><em>Columnaris</em> detected + Warm alkaline water ($T &gt; 26^\circ\text{C}$, $pH &gt; 8.2$): $+20$ points.</li>
+<li><em>Saprolegniasis</em> detected + Temperature drop ($T &lt; 18^\circ\text{C}$): $+15$ points.</li>
+<li><em>Fin Rot</em> detected + High Ammonia ($NH_3 &gt; 0.05 \text{ mg/L}$) + Hypoxia ($DO &lt; 3.5 \text{ mg/L}$): $+25$ points.</li>
+<li><em>White Spot</em> detected + Thermal instability ($|\Delta T| &gt; 3^\circ\text{C}$): $+15$ points.</li>
+<li><strong>Risk Tiers:</strong></li>
+<li><code>NORMAL (0 - 30)</code>: Green indicator. Safe conditions.</li>
+<li><code>ADVISORY (31 - 60)</code>: Yellow indicator. Moderate environmental stress.</li>
+<li><code>WARNING (61 - 80)</code>: Orange indicator. High pathogen/stress probability.</li>
+<li><code>EMERGENCY (81 - 100)</code>: Red flashing indicator. Imminent or active mass mortality.</li>
+</ul>
+<h3 id="35-fr-05-early-warning-prescriptive-action-plan-generator-p0">3.5 FR-05: Early Warning &amp; Prescriptive Action Plan Generator (P0)</h3>
+<ul>
+<li><strong>Description:</strong> Generates structured, farmer-friendly remediation steps prioritizing non-antibiotic interventions.</li>
+<li><strong>Requirements:</strong></li>
+<li>Output at least 3 prioritized action items for any risk tier $&gt; 30$.</li>
+<li>Provide concrete numbers: e.g. <em>"Apply agricultural lime at 200 kg/hectare"</em>, <em>"Operate aerator for 4 continuous hours"</em>, <em>"Prepare a 3 ppt (3 g/L) salt dip for sampled fish"</em>.</li>
+<li>Categorize actions: <code>Immediate Biosecurity</code>, <code>Water Remediation</code>, <code>Therapeutic Intervention</code>.</li>
+</ul>
+<h3 id="36-fr-06-interactive-dashboard-live-visualizations-p0">3.6 FR-06: Interactive Dashboard &amp; Live Visualizations (P0)</h3>
+<ul>
+<li><strong>Description:</strong> Responsive React.js + Bootstrap 5 single-page application.</li>
+<li><strong>Key Components:</strong></li>
+<li>Semi-circular SVG gauge displaying $R_{pond}$ with smooth animation.</li>
+<li>Dynamic color-coded status badges for all water parameters (Optimal, Warning, Critical).</li>
+<li>Multi-pond summary cards (e.g. Pond #1, Pond #2, Pond #3).</li>
+<li>Collapsible diagnostic drawer showing Top-3 disease probability bars.</li>
+</ul>
+<h3 id="37-fr-07-one-click-pre-loaded-judge-demonstration-presets-p0">3.7 FR-07: One-Click Pre-Loaded Judge Demonstration Presets (P0)</h3>
+<ul>
+<li><strong>Description:</strong> 3 dedicated demo buttons on the UI to guarantee rapid, bulletproof hackathon judge presentations:
+  1. <strong>Demo Preset 1: "Severe White Spot Outbreak"</strong> (Loads sample Ich photo, $T = 20^\circ\text{C}$, $DO = 4.2 \text{ mg/L}$ -&gt; Triggers WARNING Alert, Score = 78, Salt dip advisory).
+  2. <strong>Demo Preset 2: "Nighttime Hypoxia Emergency"</strong> (Loads moribund surface piping fish photo, $DO = 1.8 \text{ mg/L}$, $NH_3 = 0.08 \text{ mg/L}$ -&gt; Triggers EMERGENCY Alert, Score = 92, Emergency aeration advisory).
+  3. <strong>Demo Preset 3: "Optimal Pond Equilibrium"</strong> (Loads healthy carp photo, $DO = 6.8 \text{ mg/L}$, $pH = 7.4$, $T = 28^\circ\text{C}$ -&gt; Confirms NORMAL, Score = 14, Green status).</li>
+</ul>
+<h3 id="38-fr-08-supabase-storage-historical-scan-log-p1">3.8 FR-08: Supabase Storage &amp; Historical Scan Log (P1)</h3>
+<ul>
+<li><strong>Description:</strong> Persists all scan records, uploaded images, and calculated risk scores in Supabase PostgreSQL and Object Storage.</li>
+<li><strong>Requirements:</strong></li>
+<li>Display a historical audit log table with image thumbnails, timestamps, predicted disease, and risk score badge.</li>
+<li>Support filtering by pond ID and severity tier.</li>
+</ul>
+<hr />
+<h2 id="4-non-functional-requirements-nfrs">4. Non-Functional Requirements (NFRs)</h2>
+<h3 id="41-performance-latency">4.1 Performance &amp; Latency</h3>
+<ul>
+<li><strong>Inference Speed:</strong> CNN image classification forward pass must complete in $\le 45 \text{ ms}$ on standard multi-core CPU.</li>
+<li><strong>API Response Time:</strong> End-to-end roundtrip latency for <code>/api/v1/assess-pond</code> (including multipart image upload, inference, and fusion calculation) must be $\le 600 \text{ ms}$ on high-speed connection, $\le 2.0 \text{ s}$ on rural 3G connection.</li>
+<li><strong>Frontend Performance:</strong> Initial page load under 1.5 seconds; Google Lighthouse score $\ge 90$.</li>
+</ul>
+<h3 id="42-usability-accessibility">4.2 Usability &amp; Accessibility</h3>
+<ul>
+<li><strong>Responsive Layout:</strong> 100% fluid mobile responsiveness across viewports from 360px (mobile) to 1920px (desktop).</li>
+<li><strong>Outdoor Sunlight Contrast:</strong> High-contrast UI elements compliant with WCAG 2.1 AA contrast ratio ($\ge 4.5:1$) for readability on reflective phone screens under bright pond sunlight.</li>
+<li><strong>Intuitive Simplicity:</strong> Complex microbiological terms accompanied by common names (e.g., <em>"Ichthyophthiriasis (White Spot Disease)"</em>).</li>
+</ul>
+<h3 id="43-reliability-resilience">4.3 Reliability &amp; Resilience</h3>
+<ul>
+<li><strong>Graceful Degradation:</strong> If an uploaded image is unclassifiable or blurred, the system must gracefully fall back to environmental hazard scoring and prompt the user with a symptom confirmation checklist.</li>
+<li><strong>Offline Caching:</strong> Static assets and past scan logs cached via Service Worker and browser <code>localStorage</code> / <code>IndexedDB</code>.</li>
+</ul>
+<h3 id="44-security-data-privacy">4.4 Security &amp; Data Privacy</h3>
+<ul>
+<li><strong>Communication:</strong> All client-server traffic encrypted via TLS / HTTPS.</li>
+<li><strong>Database Isolation:</strong> Supabase Row-Level Security (RLS) ensures farm data is sandboxed per authenticated user.</li>
+<li><strong>Input Validation:</strong> Strict Pydantic schema validation rejecting out-of-bound sensor floats ($pH &lt; 0$ or $pH &gt; 14$).</li>
+</ul>
+<hr />
+<h2 id="5-technical-architecture-technology-stack">5. Technical Architecture &amp; Technology Stack</h2>
+<div class="mermaid-container"><pre class="mermaid">flowchart LR
+    subgraph Frontend [&quot;Frontend Tier (Client)&quot;]
+        React[&quot;React.js 18 (Vite)&quot;]
+        Bootstrap[&quot;Bootstrap 5.3 + Icons&quot;]
+        State[&quot;React Context / State&quot;]
+    end
+
+    subgraph Backend [&quot;Application Tier (FastAPI)&quot;]
+        FastAPI[&quot;Python FastAPI Service&quot;]
+        Pydantic[&quot;Pydantic v2 Schemas&quot;]
+        EngineCV[&quot;MobileNetV3 CV Engine&quot;]
+        EngineWater[&quot;Random Forest & Rules&quot;]
+        EngineFusion[&quot;Multimodal Fusion Algorithm&quot;]
+    end
+
+    subgraph Persistence [&quot;Persistence Tier (Supabase)&quot;]
+        PG[(Supabase PostgreSQL)]
+        Storage[&quot;Supabase Object Storage (fish-scans)&quot;]
+    end
+
+    React -->|HTTPS REST| FastAPI
+    FastAPI --> EngineCV
+    FastAPI --> EngineWater
+    EngineCV --> EngineFusion
+    EngineWater --> EngineFusion
+    FastAPI -->|psycopg2 / REST| PG
+    FastAPI -->|S3 Upload| Storage</pre></div>
+<ul>
+<li><strong>Frontend:</strong> React 18, Vite, Bootstrap 5.3, Bootstrap Icons, Lucide-React, Chart.js.</li>
+<li><strong>Backend:</strong> Python 3.10+, FastAPI 0.110+, Uvicorn, Pydantic v2.</li>
+<li><strong>Machine Learning:</strong> TensorFlow 2.15 / Keras (MobileNetV3-Large), Scikit-learn (Random Forest), NumPy, OpenCV / Pillow.</li>
+<li><strong>Persistence &amp; Storage:</strong> Supabase (PostgreSQL 15, Storage Bucket <code>fish-scans</code>).</li>
+</ul>
+<hr />
+<h2 id="6-detailed-api-contracts-schemas">6. Detailed API Contracts &amp; Schemas</h2>
+<h3 id="61-endpoint-1-fish-image-classifier">6.1 Endpoint 1: Fish Image Classifier</h3>
+<ul>
+<li><strong>Route:</strong> <code>POST /api/v1/analyze-fish</code></li>
+<li><strong>Content-Type:</strong> <code>multipart/form-data</code></li>
+<li><strong>Request:</strong> <code>file: UploadFile</code> (Binary image)</li>
+<li><strong>Response (JSON):</strong></li>
+</ul>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;predicted_disease&quot;: &quot;Ichthyophthiriasis (White Spot)&quot;,
+  &quot;confidence&quot;: 0.912,
+  &quot;top_3_differential&quot;: [
+    {&quot;class&quot;: &quot;Ichthyophthiriasis (White Spot)&quot;, &quot;probability&quot;: 0.912},
+    {&quot;class&quot;: &quot;Saprolegniasis (Water Mold)&quot;, &quot;probability&quot;: 0.054},
+    {&quot;class&quot;: &quot;Healthy Fish&quot;, &quot;probability&quot;: 0.034}
+  ],
+  &quot;symptoms_identified&quot;: [
+    &quot;Punctate white nodules (0.5 - 1.0 mm) on fins and flank&quot;,
+    &quot;Epidermal mucus clouding&quot;
+  ]
+}
+</code></pre>
+<h3 id="62-endpoint-2-water-quality-telemetry-analyzer">6.2 Endpoint 2: Water Quality Telemetry Analyzer</h3>
+<ul>
+<li><strong>Route:</strong> <code>POST /api/v1/water-quality</code></li>
+<li><strong>Content-Type:</strong> <code>application/json</code></li>
+<li><strong>Request (JSON):</strong></li>
+</ul>
+<pre><code class="language-json">{
+  &quot;dissolved_oxygen_mg_l&quot;: 3.4,
+  &quot;ph&quot;: 7.8,
+  &quot;temperature_c&quot;: 21.0,
+  &quot;total_ammonia_mg_l&quot;: 0.45,
+  &quot;turbidity_ntu&quot;: 45.0
+}
+</code></pre>
+<ul>
+<li><strong>Response (JSON):</strong></li>
+</ul>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;hazard_score&quot;: 68.5,
+  &quot;water_status&quot;: &quot;WARNING&quot;,
+  &quot;un_ionized_ammonia_mg_l&quot;: 0.032,
+  &quot;anomalies&quot;: [
+    &quot;Moderate Hypoxia: DO at 3.4 mg/L is below 5.0 mg/L minimum threshold&quot;,
+    &quot;Sub-optimal Temperature: 21.0 C induces immune slowdown in tropical species&quot;
+  ]
+}
+</code></pre>
+<h3 id="63-endpoint-3-unified-multimodal-assessment">6.3 Endpoint 3: Unified Multimodal Assessment</h3>
+<ul>
+<li><strong>Route:</strong> <code>POST /api/v1/assess-pond</code></li>
+<li><strong>Content-Type:</strong> <code>multipart/form-data</code></li>
+<li><strong>Request Form Fields:</strong></li>
+<li><code>image</code>: Binary file</li>
+<li><code>pond_id</code>: String (e.g. <code>"pond_01"</code>)</li>
+<li><code>do_mg_l</code>: Float</li>
+<li><code>ph</code>: Float</li>
+<li><code>temp_c</code>: Float</li>
+<li><code>ammonia_mg_l</code>: Float</li>
+<li><strong>Response (JSON):</strong></li>
+</ul>
+<pre><code class="language-json">{
+  &quot;assessment_id&quot;: &quot;asm_98234-a1&quot;,
+  &quot;timestamp&quot;: &quot;2026-10-31T23:35:00Z&quot;,
+  &quot;pond_id&quot;: &quot;pond_01&quot;,
+  &quot;composite_risk&quot;: {
+    &quot;score&quot;: 79.2,
+    &quot;tier&quot;: &quot;WARNING&quot;,
+    &quot;color&quot;: &quot;#FF8C00&quot;,
+    &quot;headline&quot;: &quot;High Risk of White Spot Epidemic&quot;
+  },
+  &quot;visual_findings&quot;: {
+    &quot;condition&quot;: &quot;Ichthyophthiriasis (White Spot)&quot;,
+    &quot;confidence&quot;: 0.912,
+    &quot;top_3&quot;: [...]
+  },
+  &quot;environmental_findings&quot;: {
+    &quot;hazard_score&quot;: 68.5,
+    &quot;anomalies&quot;: [...]
+  },
+  &quot;synergy_interaction&quot;: {
+    &quot;synergy_active&quot;: true,
+    &quot;bonus_added&quot;: 15.0,
+    &quot;reason&quot;: &quot;Cold water thermal drop accelerates Ich parasite reproduction.&quot;
+  },
+  &quot;prescriptive_action_plan&quot;: [
+    {
+      &quot;priority&quot;: 1,
+      &quot;category&quot;: &quot;Immediate Biosecurity&quot;,
+      &quot;instruction&quot;: &quot;Quarantine Pond #1. Do not transfer nets or harvesting baskets to adjacent ponds.&quot;
+    },
+    {
+      &quot;priority&quot;: 2,
+      &quot;category&quot;: &quot;Emergency Aeration&quot;,
+      &quot;instruction&quot;: &quot;Run aerator continuously tonight. Gill infestation significantly impairs oxygen diffusion.&quot;
+    },
+    {
+      &quot;priority&quot;: 3,
+      &quot;category&quot;: &quot;Non-Antibiotic Remediation&quot;,
+      &quot;instruction&quot;: &quot;Administer 3 to 5 g/L non-iodized salt bath during next net sampling.&quot;
+    }
+  ]
+}
+</code></pre>
+<hr />
+<h2 id="7-edge-cases-exception-handling">7. Edge Cases &amp; Exception Handling</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Edge Case Scenario</th>
+<th style="text-align: left;">System Behavior &amp; Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Corrupted or Unreadable Image</strong></td>
+<td style="text-align: left;">API catches decoding error, returns HTTP 422 with message: <em>"Unable to decode image file. Please upload a clear JPG/PNG photo."</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Non-Fish Image Uploaded (e.g., landscape, human, object)</strong></td>
+<td style="text-align: left;">Softmax confidence score across all 7 fish classes falls below confidence threshold ($P_{threshold} &lt; 0.50$). UI displays: <em>"Image unclear or fish not detected. Please upload a closer photo of the fish body or fins."</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Extreme Out-of-Bounds Sensor Inputs (e.g., pH = 18.0 or DO = -5.0)</strong></td>
+<td style="text-align: left;">Pydantic schema validation rejects payload with HTTP 400 Bad Request and specifies valid physiological limits.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Extreme Lethal Sensor Values (e.g., DO = 0.5 mg/L)</strong></td>
+<td style="text-align: left;">Tier 1 Biological Guardrail immediately overrides all calculations and triggers <strong>EMERGENCY (Score = 100)</strong> regardless of image classification.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Conflicting Evidence (Healthy Image + Toxic Ammonia)</strong></td>
+<td style="text-align: left;">Multimodal fusion weights environmental hazard, elevating risk score to ADVISORY/WARNING with warning: <em>"Fish currently appears asymptomatic, but toxic ammonia will trigger acute mortality within 24 hours. Immediate water exchange required."</em></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-hackathon-verification-checklist-demo-script">8. Hackathon Verification Checklist &amp; Demo Script</h2>
+<pre><code>┌────────────────────────────────────────────────────────────────────────┐
+│                   HACKATHON MVP ACCEPTANCE CRITERIA                    │
+├────────────────────────────────────────────────────────────────────────┤
+│ [ ] MobileNetV3 model fine-tuned, serialized, and loaded in FastAPI.   │
+│ [ ] Water quality hazard engine operational with FAO threshold checks. │
+│ [ ] Multimodal fusion algorithm accurately computes 0-100 score.       │
+│ [ ] React frontend renders cleanly on desktop and mobile viewports.    │
+│ [ ] Image upload, preview, and API communication functioning.          │
+│ [ ] Interactive water quality sliders update live status in real time. │
+│ [ ] 3 One-Click Demo Preset buttons successfully trigger live demos.   │
+│ [ ] Prescriptive advisory renders clear 3-step action items.           │
+│ [ ] Supabase connection stores scan records and serves image URLs.     │
+└────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="81-3-minute-live-hackathon-pitch-demo-script">8.1 3-Minute Live Hackathon Pitch &amp; Demo Script</h3>
+<ol>
+<li><strong>Minute 1: The Problem (Hook):</strong> Show a photo of an earthen pond in India/Bangladesh. Point out that diseases cost $6B/year, but farmers can't see fish under turbid water and can't afford $10,000 industrial sensors.</li>
+<li><strong>Minute 2: The Solution (AquaGuard AI):</strong>
+   * Open the responsive React dashboard on a smartphone/browser.
+   * Click <strong>Demo Preset 1 ("White Spot Outbreak")</strong>. Show the instant analysis: MobileNetV3 identifies White Spot (91%), detects a recent temperature drop, fuses them via biological synergy, and displays a Warning Risk Score of 79.
+   * Highlight the <strong>Action Plan</strong>: Instead of telling the farmer to dump antibiotics, it prescribes an immediate 3 g/L salt bath, pond quarantine, and emergency aeration.
+   * Move the <strong>Dissolved Oxygen slider</strong> down to 1.8 mg/L to demonstrate the live biological guardrail snapping into Emergency alert.</li>
+<li><strong>Minute 3: The Impact &amp; Business Moat:</strong> Emphasize zero-cost access for smallholders, AMR reduction, and the massive $38B SAM across South &amp; Southeast Asia. Conclude with live Swagger docs showing production API maturity.</li>
+</ol>
+  </div>
+
+</body>
+</html>
