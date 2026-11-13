@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AquaGuard AI — Hackathon Pitch Deck (Team: cyber knight)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --card-bg: #121826;
+      --card-border: #28344b;
+      --text-white: #ffffff;
+      --text-light: #e2e8f0;
+      --text-muted: #9ca3af;
+      --text-dim: #64748b;
+      --accent-lime: #b4f03a;
+      --accent-cyan: #38bdf8;
+      --accent-coral: #f43f5e;
+      --accent-orange: #fb923c;
+      --accent-purple: #a78bfa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #03060a;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text-white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 24px;
+      gap: 32px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fixed Deck Controls Bar */
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: rgba(180, 240, 58, 0.18);
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+      box-shadow: 0 0 14px rgba(180, 240, 58, 0.25);
+    }
+
+    .btn-active {
+      background: rgba(180, 240, 58, 0.25);
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+    }
+
+    /* 16:9 Slide Canvas */
+    .slide-wrapper {
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+        background: radial-gradient(circle at 10% 15%, rgba(56, 189, 248, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(180, 240, 58, 0.05) 0%, transparent 40%),
+        var(--bg-dark);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.8), 0 0 32px rgba(56, 189, 248, 0.08);
+      position: relative;
+      overflow: hidden;
+      padding: 34px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Header Bar */
+    .slide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .badge-ps {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--accent-cyan);
+    }
+
+    .badge-team {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: rgba(180, 240, 58, 0.12);
+      border: 1px solid var(--accent-lime);
+      border-radius: 9999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--accent-lime);
+    }
+
+    /* Title Section */
+    .title-block {
+      margin-bottom: 16px;
+    }
+
+    .slide-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-white);
+      letter-spacing: -0.02em;
+    }
+
+    .slide-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* Slide 1 Grid Layout */
+    .s1-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.38fr;
+      gap: 22px;
+      flex: 1;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1.4px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      min-height: 0;
+    }
+
+    .card-problem {
+      border-color: var(--accent-coral);
+      background: linear-gradient(180deg, rgba(244, 63, 94, 0.06) 0%, #121826 35%);
+    }
+
+    .card-solution {
+      border-color: var(--accent-lime);
+      background: linear-gradient(180deg, rgba(180, 240, 58, 0.06) 0%, #121826 35%);
+    }
+
+    .card-pill {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 3px 12px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      margin-bottom: 14px;
+    }
+
+    .pill-red {
+      background: rgba(244, 63, 94, 0.16);
+      color: var(--accent-coral);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+    }
+
+    .pill-lime {
+      background: rgba(180, 240, 58, 0.16);
+      color: var(--accent-lime);
+      border: 1px solid rgba(180, 240, 58, 0.4);
+    }
+
+    .pill-cyan {
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .pill-purple {
+      background: rgba(167, 139, 250, 0.16);
+      color: var(--accent-purple);
+      border: 1px solid rgba(167, 139, 250, 0.4);
+    }
+
+    /* Problem List */
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .problem-list li {
+      font-size: 12px;
+      line-height: 1.48;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .problem-list li::before {
+      content: "•";
+      color: var(--accent-coral);
+      font-weight: 900;
+      font-size: 16px;
+      position: absolute;
+      left: 0;
+      top: -2px;
+    }
+
+    .problem-list strong {
+      color: var(--text-white);
+      font-weight: 700;
+    }
+
+    /* Solution Flow */
+    .solution-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .inputs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+    }
+
+    .input-pill {
+      background: rgba(10, 15, 26, 0.85);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 9px;
+      padding: 9px 12px;
+      font-size: 11px;
+    }
+
+    .input-pill.lime {
+      border-color: var(--accent-lime);
+    }
+
+    .input-pill.purple {
+      border-color: var(--accent-purple);
+    }
+
+    .input-pill.orange {
+      border-color: var(--accent-orange);
+    }
+
+    .input-pill .title {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .input-pill .desc {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .arrow-divider {
+      text-align: center;
+      color: var(--accent-lime);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .engine-box {
+      background: rgba(20, 18, 34, 0.95);
+      border: 1.2px solid var(--accent-purple);
+      border-radius: 10px;
+      padding: 10px 14px;
+      text-align: center;
+    }
+
+    .engine-box .engine-title {
+      font-size: 12.8px;
+      font-weight: 800;
+      color: var(--accent-lime);
+      margin-bottom: 4px;
+    }
+
+    .engine-box .engine-desc {
+      font-size: 10.6px;
+      color: var(--text-light);
+      line-height: 1.38;
+    }
+
+    .output-box {
+      background: rgba(12, 28, 36, 0.9);
+      border: 1.2px solid var(--accent-cyan);
+      border-radius: 10px;
+      padding: 9px 12px;
+      text-align: center;
+    }
+
+    .output-box .out-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      margin-bottom: 2px;
+    }
+
+    .output-box .out-desc {
+      font-size: 10.4px;
+      color: #e2e8f0;
+    }
+
+    /* Slide 2 3-Column Layout */
+    .s2-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      flex: 1;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8.5px;
+    }
+
+    .feature-list li {
+      font-size: 10.8px;
+      line-height: 1.42;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 17px;
+    }
+
+    .feature-list li::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 10.5px;
+    }
+
+    .feature-list.core li::before {
+      content: "✔";
+      color: var(--accent-cyan);
+      font-weight: 900;
+    }
+
+    .feature-list.adv li::before {
+      content: "★";
+      color: var(--accent-purple);
+      font-weight: 900;
+    }
+
+    .feature-list strong {
+      color: var(--text-white);
+      font-weight: 700;
+    }
+
+    .section-subhead {
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      margin-top: 4px;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .tech-item {
+      font-size: 10.2px;
+      line-height: 1.34;
+      color: var(--text-muted);
+      background: rgba(10, 15, 26, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 5px 8px;
+    }
+
+    .tech-item strong {
+      color: var(--text-white);
+    }
+
+    .impact-item {
+      font-size: 10.2px;
+      line-height: 1.34;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .impact-item::before {
+      content: "▲";
+      color: var(--accent-orange);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 8.5px;
+    }
+
+    .impact-item strong {
+      color: var(--text-white);
+    }
+
+    /* Footer */
+    .slide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      padding-top: 8px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .slide-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: transparent;
+      }
+
+      .deck-controls {
+        display: none;
+      }
+
+      .slide-wrapper {
+        page-break-after: always;
+        max-width: 100%;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Controls Bar -->
+  <div class="deck-controls">
+    <span style="font-size: 12px; font-weight: 700; color: #b4f03a; letter-spacing: 0.05em;">AQUAGUARD AI • TEAM: CYBER
+      KNIGHT</span>
+    <a href="#slide-1" class="btn btn-active" onclick="showSlide(1)">Slide 1 (Problem & Solution)</a>
+    <a href="#slide-2" class="btn" onclick="showSlide(2)">Slide 2 (Features & Impact)</a>
+    <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    <a href="AquaGuard_AI_Hackathon_Pitch_Deck.pptx" download class="btn"
+      style="background: rgba(180, 240, 58, 0.18); border-color: #b4f03a; color: #b4f03a;">📥 Download .PPTX</a>
+  </div>
+
+  <!-- SLIDE 1 -->
+  <section id="slide-1" class="slide-wrapper">
+    <!-- Header -->
+    <div class="slide-header">
+      <div class="badge-ps">HACKATHON &nbsp;|&nbsp; PROBLEM STATEMENT 18</div>
+      <div class="badge-team">Team: cyber knight</div>
+    </div>
+
+    <!-- Title Block -->
+    <div class="title-block">
+      <h1 class="slide-title">Fish Disease Risk Detection & Early Warning!</h1>
+      <p class="slide-subtitle">Smart AI early warning system that catches fish illness early and protects pond health
+      </p>
+    </div>
+
+    <!-- Main 2-Column Content -->
+    <div class="s1-grid">
+      <!-- Col 1: The Problem -->
+      <div class="card card-problem">
+        <div class="card-pill pill-red">THE PROBLEM</div>
+        <ul class="problem-list">
+          <li><strong>Late Detection:</strong> By the time sores, red spots, or pale gills appear on fish, the illness
+            has already spread to the whole pond.</li>
+          <li><strong>Disconnected Data:</strong> Fish photos, water tests (oxygen, pH, ammonia), and farm loss logs sit
+            in separate places with no connection.</li>
+          <li><strong>Heavy Fish Losses:</strong> Acting too late causes 50% to 80% of fish to die within just 2 to 3
+            days of water stress or disease.</li>
+          <li><strong>Harmful Antibiotic Use:</strong> Panic use of harsh antibiotics ruins pond water quality, kills
+            natural biology, and leads to market bans.</li>
+        </ul>
+      </div>
+
+      <!-- Col 2: Our Solution (Flow) -->
+      <div class="card card-solution">
+        <div class="card-pill pill-lime">OUR SOLUTION</div>
+        <div class="solution-flow">
+          <!-- Step 1: 4 Inputs Grid -->
+          <div class="inputs-grid">
+            <div class="input-pill">
+              <span class="title" style="color: var(--accent-cyan);">📸 Pond Fish Photos</span>
+              <span class="desc">Spots 7 fish diseases<br>(sores, fins, gills, scales)</span>
+            </div>
+            <div class="input-pill purple">
+              <span class="title" style="color: var(--accent-purple);">🐟 Fish Behaviour Logs</span>
+              <span class="desc">Tracks surfacing, lethargy<br>&amp; slow feeding activity</span>
+            </div>
+            <div class="input-pill orange">
+              <span class="title" style="color: var(--accent-orange);">📋 Mortality Records</span>
+              <span class="desc">Saves daily losses &amp; past<br>pond checkup history</span>
+            </div>
+            <div class="input-pill lime">
+              <span class="title" style="color: var(--accent-lime);">🧪 Pond Water Tests</span>
+              <span class="desc">Measures Oxygen, pH,<br>Temp &amp; toxic Ammonia</span>
+            </div>
+          </div>
+
+          <!-- Arrow 1 -->
+          <div class="arrow-divider">▼</div>
+
+          <!-- Step 2: AI Risk Engine Core -->
+          <div class="engine-box">
+            <div class="engine-title">AI Risk Engine: CNN Photo AI + Water Model + Disease Synergy</div>
+            <div class="engine-desc">
+              • <strong>Photo AI (MobileNetV3):</strong> Scans fish skin and gills with 98% accuracy (55% score
+              weight)<br>
+              • <strong>Water AI (Random Forest):</strong> Predicts water danger score from oxygen, pH &amp; ammonia
+              (45% weight)<br>
+              • <strong>Hidden Synergy Check:</strong> Flags when warm dirty water makes fish disease spread 3x faster
+              (+20 pts)
+            </div>
+          </div>
+
+          <!-- Arrow 2 -->
+          <div class="arrow-divider">▼</div>
+
+          <!-- Step 3: Actionable Output -->
+          <div class="output-box">
+            <div class="out-title">Risk Score (0–100) + Natural Treatment Plan + Regional Voice Alert</div>
+            <div class="out-desc">Exact salt &amp; lime amounts, water flush volume, air pump runtime &amp; 12 Indian
+              languages</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="slide-footer">
+      <span>AquaGuard AI &nbsp;•&nbsp; Hackathon Submission Deck</span>
+      <span class="slide-num">1</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 -->
+  <section id="slide-2" class="slide-wrapper">
+    <!-- Header -->
+    <div class="slide-header">
+      <div class="badge-ps">WHAT WE WILL BUILD</div>
+      <div class="badge-team">Team: cyber knight</div>
+    </div>
+
+    <!-- Title Block -->
+    <div class="title-block">
+      <h1 class="slide-title">Features, Technology &amp; Impact</h1>
+      <p class="slide-subtitle">Simple, practical tools designed for real fish farmers to protect crops without
+        antibiotics</p>
+    </div>
+
+    <!-- Main 3-Column Content -->
+    <div class="s2-grid">
+      <!-- Col 1: Core Features -->
+        <div class="card" style="border-color: var(--accent-cyan);">
+          <div class="card-pill pill-cyan">CORE FEATURES</div>
+          <ul class="feature-list core">
+            <li><strong>Phone Photo Scanner:</strong> Take a quick photo of sick fish to detect 7 major diseases (Red
+              sores, Dropsy, Gill disease, White tail, Fungus, Parasites) with 98% accuracy.</li>
+            <li><strong>Water Quality Checker:</strong> Checks Oxygen, pH, Temperature, and Ammonia levels in seconds to
+              flag dangerous pond water conditions.</li>
+            <li><strong>Simple Danger Meter (0–100):</strong> Combines fish photo (55%) and water tests (45%) into one
+              clear score: Safe, Watch, Warning, or Critical Danger.</li>
+            <li><strong>Early Sickness Warning:</strong> Spots invisible risks—like warm water making gill infections
+              spread 3 times faster—before mass mortality begins.</li>
+            <li><strong>Blur &amp; Glare Checker:</strong> Automatically checks photo sharpness and lighting so farmers
+              don't get inaccurate test results.</li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Advanced Features -->
+          <div class="card" style="border-color: var(--accent-purple);">
+            <div class="card-pill pill-purple">ADVANCED FEATURES</div>
+            <ul class="feature-list adv">
+              <li><strong>Natural Dosage Calculator:</strong> Enter pond length, width &amp; depth to calculate the
+                exact kilograms and 50 kg sacks of salt and lime needed—no guessing.</li>
+              <li><strong>Past Pond Health Records:</strong> Keeps a clean digital ledger of every test, photo, and
+                treatment so farmers can track trends across all ponds.</li>
+              <li><strong>12 Indian Languages:</strong> Complete app translation into Hindi, Bengali, Telugu, Tamil,
+                Malayalam, Kannada, Marathi, Gujarati, Odia, Punjabi &amp; more.</li>
+              <li><strong>Emergency Life Guardrail:</strong> Automatically triggers a top emergency alert if dissolved
+                oxygen drops below lethal limits (&lt; 2.0 mg/L).</li>
+              <li><strong>Future Roadmap:</strong> Underwater camera monitoring, feeding sound sensors, and regional
+                disease outbreak maps.</li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Tech Stack & Impact -->
+            <div class="card" style="border-color: var(--accent-lime);">
+              <div class="card-pill pill-lime">TECH STACK &amp; IMPACT</div>
+
+              <div class="section-subhead" style="color: var(--accent-lime);">SIMPLE TECH STACK</div>
+              <div class="tech-list">
+                <div class="tech-item"><strong>AI / ML:</strong> Python · MobileNetV3 CNN · Random Forest · OpenCV</div>
+                <div class="tech-item"><strong>Backend:</strong> FastAPI · Python 3.12 · Uvicorn · Supabase Cloud</div>
+                <div class="tech-item"><strong>Frontend:</strong> React 19 · Vite · Tailwind CSS · Fast Mobile Web</div>
+              </div>
+
+              <div class="section-subhead" style="color: var(--accent-orange);">REAL FARM IMPACT</div>
+              <div class="impact-item"><strong>48–72h Early Warning:</strong> Catches water and fish stress before mass
+                die-offs begin.</div>
+              <div class="impact-item"><strong>70% Less Fish Mortality:</strong> Lowers typical disease loss from 60%
+                down to under 10%.</div>
+              <div class="impact-item"><strong>Zero Antibiotics Needed:</strong> Replaces harsh chemicals with safe
+                salt, lime &amp; fresh water.</div>
+              <div class="impact-item"><strong>Farmer Friendly:</strong> Simple English and 12 local Indian languages
+                for any farmer to use.</div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="slide-footer">
+            <span>AquaGuard AI &nbsp;•&nbsp; Hackathon Submission Deck</span>
+            <span class="slide-num">2</span>
+          </div>
+  </section>
+
+  <script>
+    function showSlide(num) {
+      const el = document.getElementById('slide-' + num);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+      document.querySelectorAll('.deck-controls a.btn').forEach((b, idx) => {
+        if (idx === num - 1) b.classList.add('btn-active');
+        else b.classList.remove('btn-active');
+      });
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === '2') {
+        showSlide(2);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp' || e.key === '1') {
+        showSlide(1);
+      }
+    });
+  </script>
+</body>
+
+</html>
